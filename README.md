@@ -1,1 +1,1 @@
-# pokemon-task
+# angular-assignment
