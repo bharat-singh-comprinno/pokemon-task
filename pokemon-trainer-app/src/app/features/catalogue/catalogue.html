@@ -1,1 +1,23 @@
-<p>catalogue works!</p>
+<div class="min-h-screen bg-gray-100">
+  <header class="bg-red-600 text-white py-6 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h1 class="text-4xl font-bold">Pokémon Catalogue</h1>
+      <p class="text-xl mt-2">
+        Welcome,!
+      </p>
+      <a routerLink="/trainer" class="mt-4 inline-block bg-green-600 hover:bg-green-700 px-6 py-3 rounded-full text-lg font-semibold transition">
+        <!-- My Pokémon ({{ (trainerService.trainer?.pokemon?.length || 0) }}) -->
+      </a>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto p-6">
+    <div *ngIf="isLoading" class="text-center py-20">
+      <div class="inline-block animate-spin w-16 h-16 border-8 border-red-500 border-t-transparent rounded-full"></div>
+      <p class="text-2xl mt-6 text-gray-600">Loading Pokémon...</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6" *ngIf="!isLoading">
+    </div>
+  </div>
+</div>

@@ -1,1 +1,33 @@
-<p>trainer works!</p>
+<div class="min-h-screen bg-gradient-to-b from-blue-500 to-blue-700">
+  <div class="max-w-6xl mx-auto p-6">
+    <header class="text-center py-10">
+      <h1 class="text-5xl font-bold text-white mb-2">My Pokémon</h1>
+      <p class="text-2xl text-yellow-300">
+        <!-- {{ localStorage.getItem('trainerName') }}'s Collection -->
+      </p>
+      <a routerLink="/catalogue" class="mt-6 inline-block bg-white text-blue-700 px-8 py-4 rounded-full text-xl font-bold hover:bg-gray-100 transition">
+        Back to Catalogue
+      </a>
+    </header>
+
+    <div *ngIf="collected$ | async as collected; else empty" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 mt-10">
+      <div *ngFor="let p of collected" class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition">
+        <img [src]="p.sprites.front_default" [alt]="p.name" class="w-full h-48 object-contain bg-gray-50">
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-bold capitalize">{{ p.name }}</h3>
+          
+        </div>
+      </div>
+    </div>
+
+    <ng-template #empty>
+      <div class="text-center py-20">
+        <h2 class="text-4xl font-bold text-white mb-6">No Pokémon Caught Yet!</h2>
+        <p class="text-xl text-yellow-200 mb-10">Time to become a Pokémon Master!</p>
+        <button routerLink="/catalogue" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-10 py-5 rounded-full text-2xl font-bold transition transform hover:scale-110">
+          Catch Pokémon!
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>
