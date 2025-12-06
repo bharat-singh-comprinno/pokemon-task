@@ -1,0 +1,33 @@
+.pokemon-card {
+  display: flex;
+  align-items: center;
+  background: #f4f4f4;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  gap: 12px;
+}
+
+.pokemon-card img {
+  width: 60px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.remove-btn {
+  background: crimson;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background: red;
+}

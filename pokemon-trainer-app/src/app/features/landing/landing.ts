@@ -1,24 +1,29 @@
-// src/app/features/landing/landing.component.ts
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Trainer } from '../../core/trainer';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
   imports: [FormsModule],
   templateUrl: './landing.html',
-  styleUrl: './landing.css'
+  styleUrl: './landing.css',
 })
 export class Landing {
-  username = '';
 
-  constructor(private router: Router) {}
+  username: string = '';
+
+  constructor(private router: Router) {
+    const saved = localStorage.getItem('trainer');
+    if (saved) {
+      this.router.navigate(['/catalogue']);
+    }
+  }
 
   login() {
     if (this.username.trim()) {
-      // Save username directly in localStorage (no API, no service)
-      localStorage.setItem('trainerName', this.username.trim());
+      localStorage.setItem('trainer', this.username);
       this.router.navigate(['/catalogue']);
     }
   }
