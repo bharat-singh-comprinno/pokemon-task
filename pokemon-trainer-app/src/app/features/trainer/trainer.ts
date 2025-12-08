@@ -28,8 +28,6 @@ export class Trainer implements OnInit {
 
   removePokemon(name: string) {
     this.selectedPokemons = this.selectedPokemons.filter(p => p.name !== name);
-    
-    // Update sessionStorage
     sessionStorage.setItem('selectedPokemon', JSON.stringify(this.selectedPokemons));
   }
 

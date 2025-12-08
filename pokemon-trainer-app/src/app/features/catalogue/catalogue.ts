@@ -1,8 +1,10 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Pokemon } from '../../core/pokemon';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-catalogue',
@@ -11,13 +13,14 @@ import { Pokemon } from '../../core/pokemon';
   templateUrl: './catalogue.html',
   styleUrl: './catalogue.css',
 })
-export class Catalogue implements OnInit {
+export class Catalogue implements OnInit, OnDestroy {
 
   pokemonList = signal<any[]>([]);
   filteredPokemon = signal<any[]>([]);
   selectedPokemon = signal<any[]>([]);
   loading = signal(true);
   searchTerm = '';
+  private searchSubject = new Subject<string>();
 
   constructor(
     private pokemonService: Pokemon,
@@ -27,6 +30,23 @@ export class Catalogue implements OnInit {
   ngOnInit() {
     this.loadPokemon();
     this.loadSelectedPokemon();
+    this.setupSearch();
+  }
+
+  ngOnDestroy() {
+    this.searchSubject.complete();
+  }
+
+  setupSearch() {
+    this.searchSubject.pipe(
+      debounceTime(1000),
+      distinctUntilChanged()
+    ).subscribe(searchTerm => {
+      const filtered = this.pokemonList().filter(p => 
+        p.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      this.filteredPokemon.set(filtered);
+    });
   }
 
   loadPokemon() {
@@ -62,11 +82,8 @@ export class Catalogue implements OnInit {
     }
   }
 
-  filterPokemon() {
-    const filtered = this.pokemonList().filter(p => 
-      p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-    this.filteredPokemon.set(filtered);
+  onSearchChange() {
+    this.searchSubject.next(this.searchTerm);
   }
 
   isCollected(name: string) {
