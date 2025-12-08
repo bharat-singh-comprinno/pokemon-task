@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trainer',
@@ -12,6 +13,8 @@ export class Trainer implements OnInit {
 
   trainerName: string = '';
   selectedPokemons: any[] = [];
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     // Get trainer name from localStorage
@@ -28,5 +31,11 @@ export class Trainer implements OnInit {
     
     // Update sessionStorage
     sessionStorage.setItem('selectedPokemon', JSON.stringify(this.selectedPokemons));
+  }
+
+  logout() {
+    localStorage.removeItem('trainer');
+    sessionStorage.removeItem('selectedPokemon');
+    this.router.navigate(['/landing']);
   }
 }
