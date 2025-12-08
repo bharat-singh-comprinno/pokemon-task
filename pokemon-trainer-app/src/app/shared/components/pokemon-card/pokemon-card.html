@@ -1,0 +1,20 @@
+<div class="bg-gray-800 rounded-xl p-4 flex flex-col items-center relative">
+  @if (isCollected) {
+    <span class="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center"> 
+      <div class="p-1 bg-amber-500 rounded-[50%]"></div>
+    </span>
+  }
+
+  <img [src]="pokemon.image" [alt]="pokemon.name" class="w-20 h-20 mb-3">
+  
+  <h4 class="capitalize text-lg font-semibold mb-3">{{ pokemon.name }}</h4>
+  
+  <button 
+    (click)="onCatch()" 
+    [disabled]="isCollected"
+    [class]="isCollected ? 
+      'px-3 py-1 bg-green-500 rounded text-white cursor-not-allowed' : 
+      'px-3 py-1 bg-blue-500 hover:bg-blue-600 rounded text-white'">
+    {{ isCollected ? 'Caught' : 'Catch' }}
+  </button>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Trainer as TrainerService } from '../../services/trainer.service';
 
 @Component({
   selector: 'app-trainer',
@@ -11,29 +12,32 @@ import { Router } from '@angular/router';
 })
 export class Trainer implements OnInit {
 
-  trainerName: string = '';
-  selectedPokemons: any[] = [];
+  // trainerName: string = '';
+  // selectedPokemons: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public trainerService: TrainerService) {}
 
   ngOnInit(): void {
     // Get trainer name from localStorage
-    const storedName = localStorage.getItem('trainer');
-    if (storedName) this.trainerName = storedName;
+    // const storedName = localStorage.getItem('trainer');
+    // if (storedName) this.trainerName = storedName;
 
-    // Get selected pokemons from sessionStorage
-    const savedData = sessionStorage.getItem('selectedPokemon');
-    if (savedData) this.selectedPokemons = JSON.parse(savedData);
+    // const savedData = sessionStorage.getItem('selectedPokemon');
+    // if (savedData) this.selectedPokemons = JSON.parse(savedData);
+    this.trainerService.loadTrainerFromStorage();
+    this.trainerService.loadSelectedPokemons();
   }
 
   removePokemon(name: string) {
-    this.selectedPokemons = this.selectedPokemons.filter(p => p.name !== name);
-    sessionStorage.setItem('selectedPokemon', JSON.stringify(this.selectedPokemons));
+    // this.selectedPokemons = this.selectedPokemons.filter(p => p.name !== name);
+    // sessionStorage.setItem('selectedPokemon', JSON.stringify(this.selectedPokemons));
+    this.trainerService.removePokemon(name);
   }
 
   logout() {
-    localStorage.removeItem('trainer');
-    sessionStorage.removeItem('selectedPokemon');
+    // localStorage.removeItem('trainer');
+    // sessionStorage.removeItem('selectedPokemon');
+    this.trainerService.logout();
     this.router.navigate(['/landing']);
   }
 }

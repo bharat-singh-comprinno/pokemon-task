@@ -2,14 +2,15 @@ import { Component, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Pokemon } from '../../core/pokemon';
+import { Pokemon } from '../../services/pokemon.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { PokemonCard } from '../../shared/components/pokemon-card/pokemon-card';
 
 @Component({
   selector: 'app-catalogue',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, PokemonCard],
   templateUrl: './catalogue.html',
   styleUrl: './catalogue.css',
 })
@@ -60,8 +61,8 @@ export class Catalogue implements OnInit, OnDestroy {
       return;
     }
 
-    this.pokemonService.getPokemonList().subscribe((res: any) => {
-      const list = res.results.map((p: any) => ({
+    this.pokemonService.getPokemonList(50).subscribe((res: any) => {
+    const list = res.results.map((p: any) => ({
         name: p.name,
         image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
           p.url.split('/')[6]

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Trainer } from '../../core/trainer';
+import { Trainer as TrainerService } from '../../services/trainer.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -14,8 +14,11 @@ export class Landing {
 
   username: string = '';
 
-  constructor(private router: Router) {
-    const saved = localStorage.getItem('trainer');
+  constructor(
+    private router: Router,
+    private trainerService: TrainerService
+  ) {
+    const saved = this.trainerService.loadTrainerFromStorage();
     if (saved) {
       this.router.navigate(['/catalogue']);
     }
@@ -23,7 +26,8 @@ export class Landing {
 
   login() {
     if (this.username.trim()) {
-      localStorage.setItem('trainer', this.username);
+      // localStorage.setItem('trainer', this.username);
+      this.trainerService.saveTrainerLocally(this.username)
       this.router.navigate(['/catalogue']);
     }
   }
