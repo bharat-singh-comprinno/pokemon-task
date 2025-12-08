@@ -7,7 +7,7 @@
 
   <img [src]="pokemon.image" [alt]="pokemon.name" class="w-20 h-20 mb-3">
   
-  <h4 class="capitalize text-lg font-semibold mb-3">{{ pokemon.name }}</h4>
+  <h4 class="text-lg font-semibold mb-3">{{ pokemon.name | capitalize }}</h4>
   
   <button 
     (click)="onCatch()" 

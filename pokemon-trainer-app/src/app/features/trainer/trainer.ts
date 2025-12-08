@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Trainer as TrainerService } from '../../services/trainer.service';
+import { CapitalizePipe } from '../../shared/pipes/capitalize-pipe';
 
 @Component({
   selector: 'app-trainer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CapitalizePipe],
   templateUrl: './trainer.html',
   styleUrls: ['./trainer.css']
 })

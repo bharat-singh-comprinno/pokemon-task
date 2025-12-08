@@ -1,9 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CapitalizePipe } from '../../pipes/capitalize-pipe';
 
 @Component({
   selector: 'app-pokemon-card',
-  imports: [CommonModule],
+  imports: [CommonModule, CapitalizePipe],
   templateUrl: './pokemon-card.html',
   styleUrl: './pokemon-card.css',
 })
