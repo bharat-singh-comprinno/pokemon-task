@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SessionStorage } from './session-storage';
+import { SessionStorage } from './session-storage.service';
 
 describe('SessionStorage', () => {
   let service: SessionStorage;
