@@ -35,6 +35,10 @@ export class Trainer implements OnInit {
     this.trainerService.removePokemon(name);
   }
 
+  backToCatelogue(){
+    
+  }
+
   logout() {
     // localStorage.removeItem('trainer');
     // sessionStorage.removeItem('selectedPokemon');

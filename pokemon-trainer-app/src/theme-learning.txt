@@ -1,0 +1,44 @@
+## Data Flow Diagram:
+
+1. Button Click (app.html)
+(click)="toggleTheme()" 
+
+↓
+
+2. App Component Method (app.ts)
+typescript
+toggleTheme(): void {
+  this.themeService.toggle();  // Calls service method
+}
+
+↓
+
+3. Theme Service Toggle (theme.service.ts)
+typescript
+toggle(): void {
+  this.isDark.update(current => {
+    const newTheme = !current;                    // Flip boolean value
+    localStorage.setItem('theme', newTheme ? 'dark' : 'light');  // Save to storage
+    document.documentElement.classList.toggle('dark', newTheme); // Add/remove CSS class
+    return newTheme;                              // Update signal value
+  });
+}
+
+↓
+
+4. Multiple Effects Happen:
+
+• **localStorage**: Stores "dark" or "light" string
+• **DOM**: Adds/removes dark class on <html> element  
+• **Signal**: Updates isDark signal value (true/false)
+• **CSS**: :root vs .dark CSS variables activate
+• **UI**: Button text changes via {{ themeService.isDark() ? '☀️ Light' : '🌙 Dark' }}
+• **All Pages**: Background/text colors change via var(--bg-primary) etc.
+
+## Key Data Types:
+• **Signal**: boolean (true = dark, false = light)
+• **localStorage**: string ("dark" or "light") 
+• **DOM**: CSS class presence (dark class exists or not)
+• **CSS Variables**: Color values change based on .dark selector
+
+The signal automatically triggers UI updates across all components that reference themeService.isDark().

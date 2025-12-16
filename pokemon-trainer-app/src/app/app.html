@@ -1,2 +1,11 @@
-
-<router-outlet />
+<div class="min-h-screen">
+  <header class="p-4" style="background-color: var(--bg-secondary);">
+    <button 
+      (click)="toggleTheme()" 
+      class="px-4 py-2 rounded border"
+      style="background-color: var(--bg-primary); color: var(--text-primary); border-color: var(--text-secondary);">
+      {{ themeService.isDark() ? '☀️ Light' : '🌙 Dark' }}
+    </button>
+  </header>
+  <router-outlet />
+</div>

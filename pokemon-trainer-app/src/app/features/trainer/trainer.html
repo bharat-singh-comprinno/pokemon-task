@@ -1,22 +1,28 @@
-<div class="p-6 bg-gray-900 min-h-screen text-white">
+<div class="p-6 min-h-screen" style="background-color: var(--bg-primary); color: var(--text-primary);">
 
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-3xl font-bold">Trainer Profile</h2>
+    
     <button 
       (click)="logout()" 
       class="px-4 py-2 bg-red-500 hover:bg-red-600 rounded text-white">
       Logout
     </button>
   </div>
+  <!-- <button 
+          (click)="backToCatelogue()" 
+          class="px-3 py-1 bg-amber-700 hover:bg-red-600 rounded text-white">
+          Back
+        </button> -->
 
-  <div class="bg-gray-800 p-4 rounded-lg mb-6">
+  <div class="p-4 rounded-lg mb-6" style="background-color: var(--bg-secondary);">
     <p class="text-xl"><strong>Trainer Name:</strong> {{ trainerService.trainerName() | capitalize}}</p>
   </div>
 
   <h3 class="text-2xl font-semibold mb-4">Your Pokémon Team ({{ trainerService.selectedPokemons().length }})</h3>
 
   @if (trainerService.selectedPokemons().length === 0) {
-    <div class="text-center text-gray-400 py-8">
+    <div class="text-center py-8" style="color: var(--text-secondary);">
       <p class="text-xl">No Pokémon selected yet.</p>
       <p>Go back to catalogue to catch some Pokémon!</p>
     </div>
@@ -24,11 +30,11 @@
 
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     @for (p of trainerService.selectedPokemons(); track p.name) {
-      <div class="bg-gray-800 rounded-xl p-4 flex flex-col items-center">
+      <div class="rounded-xl p-4 flex flex-col items-center" style="background-color: var(--bg-secondary);">
         <img [src]="p.image" [alt]="p.name" class="w-20 h-20 mb-3">
         
         <h4 class="text-lg font-semibold mb-3">{{ p.name | capitalize }}</h4>
-        
+
         <button 
           (click)="removePokemon(p.name)" 
           class="px-3 py-1 bg-red-500 hover:bg-red-600 rounded text-white">
