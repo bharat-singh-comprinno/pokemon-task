@@ -1,0 +1,17 @@
+{
+  "count": 1302,
+  "results": [
+    {
+      "name": "pikachu",
+      "url": "https://pokeapi.co/api/v2/pokemon/25/"
+    },
+    {
+      "name": "charizard",
+      "url": "https://pokeapi.co/api/v2/pokemon/6/"
+    },
+    {
+      "name": "blastoise",
+      "url": "https://pokeapi.co/api/v2/pokemon/9/"
+    }
+  ]
+}
